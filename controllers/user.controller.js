@@ -1,45 +1,73 @@
+const User = require('../models/user');
+const { encryptPassword } = require('../helpers/encrypt');
 
-
-const usersGet = (req, res) => {
+const usersGet = async(req, res) => {
     
-    const {q, name = '', apikey} = req.query;
+    const { limit = 5, from = 0} = req.query ;
+    const query = { status: true };
+
+    const [ entries, users ] = await Promise.all([
+        User.countDocuments( query ),
+        User.find( query )
+            .skip( Number( from ))
+            .limit( Number( limit ))
+    ]);
 
     res.status(200).json({
-        message: 'get API - controller',
-        q,
-        name,
-        apikey
+       entries,
+       users
     })
 
 }
 
-const usersPut = (req, res) => {
+const usersPut = async(req, res) => {
 
     const { id } = req.params;
+    const { _id, password, google, email, ...rest} = req.body;
+
+    // TODO: validate with db
+    if ( password ){
+        rest.password = encryptPassword( password );
+    }
+
+    const user = await User.findByIdAndUpdate( id, rest);
 
     res.status(200).json({
         message: 'put API - controller',
-        id
+        user
     })
 
 }
 
-const usersPost = (req, res) => {
+const usersPost = async(req, res) => {
 
-    const {name, id} = req.body;
+    const { name, email, password, role } = req.body;
+    const user = new User({ name, email, password, role });
+
+    // Encrypt password
+    user.password = encryptPassword( password );
+
+    await user.save();
 
     res.status(200).json({
         message: 'post API - controller',
-        name,
-        id
+        user
     })
 
 };
 
-const usersDelete = (req, res) => {
+const usersDelete = async(req, res) => {
+
+    const { id } = req.params;
+
+    // Hard delete
+    //const user = await User.findByIdAndDelete( id );
+
+    const user = await User.findByIdAndUpdate( id, { status: false });
+
     res.status(200).json({
-        message: 'delete API - controller',
-    })
+        user
+    });
 };
 
 const usersPatch = (req, res) => {
