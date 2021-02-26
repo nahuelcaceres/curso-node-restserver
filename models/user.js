@@ -35,7 +35,9 @@ const SchemaUser = Schema({
 
 // Como hacemos uso del this, no podemos usar una arrow function
 SchemaUser.methods.toJSON = function() {
-    const {__v, password, ...user} = this.toObject();
+    const {__v, password, _id, ...user} = this.toObject();
+
+    user.uid = _id;
 
     return user;
 } 

@@ -1,3 +1,4 @@
+const ObjectID = require('mongodb').ObjectID;
 const User = require('../models/user');
 const { encryptPassword } = require('../helpers/encrypt');
 
@@ -59,11 +60,16 @@ const usersPost = async(req, res) => {
 const usersDelete = async(req, res) => {
 
     const { id } = req.params;
-
     // Hard delete
     //const user = await User.findByIdAndDelete( id );
 
-    const user = await User.findByIdAndUpdate( id, { status: false });
+    try {
+        
+        const user = await User.findByIdAndUpdate({'_id': ObjectID(id)} , { status: false });
+
+    } catch (err) {
+        console.log({err});        
+    } 
 
     res.status(200).json({
         user

@@ -11,6 +11,8 @@ const { usersGet,
 
 const { fieldValidate } = require('../middlewares/fields-validate');
 const { validRole, emailAlreadyExist, userExistById} = require('../helpers/db-validators');
+const { jwtValidate } = require('../middlewares/jwt-validate');
+const { isRoleAdmin, hasRole } = require('../middlewares/roles-validate');
 
 
 router.get('/', usersGet );
@@ -32,6 +34,9 @@ router.post('/', [
 ], usersPost );
 
 router.delete('/:id', [
+    jwtValidate,
+    //isRoleAdmin,
+    hasRole('ADMIN_ROLE', 'VENTAS_ROLE', 'USER_ROLE'), //TODO: obtener esta lista desde un servicio
     check('id', 'No es un ID valido').isMongoId(),
     check('id').custom( (id) => userExistById( id )),
     fieldValidate
