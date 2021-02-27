@@ -9,3 +9,5 @@
 
 After that you need go to github and click on Releases (at the right) edit and publish release to generate
 a image ready to download it.
+
+heroku logs -n 100 --tail
