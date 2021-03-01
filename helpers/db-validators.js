@@ -1,3 +1,5 @@
+const { Category } = require('../models');
+const { Product } = require('../models');
 const Role = require('../models/role');
 const User = require('../models/user');
 
@@ -33,10 +35,45 @@ const userExistById = async ( id ) => {
     }
 }   
 
+const categoryExistById = async ( id ) => {
 
+    try {
+        const categoryExist = await Category.findById( id ) ;
+    
+        if ( !categoryExist ) {
+            throw new Error(`Not exist any user with id: ${ id }`);
+        }
+
+    } catch (err) {
+        //TODO: Buscar por que me da este error en el DELETE, 
+        //      pero no cuando hago el findById en el POST
+        console.log("Error trycacheado:", err);    
+    }
+}   
+
+const productExistById = async ( id ) => {
+
+    try {
+        const productExist = await Product.findById( id ) ;
+    
+        if ( !productExist ) {
+            throw new Error(`Not exist id: ${ id }`);
+        }
+
+    } catch (err) {
+        //TODO: Buscar por que me da este error en el DELETE, 
+        //      pero no cuando hago el findById en el POST
+        console.log("Error trycacheado:", err);    
+    }
+}   
 
 module.exports = {
     validRole,
+    
     emailAlreadyExist,
-    userExistById
+    userExistById,
+
+    categoryExistById,
+
+    productExistById,
 };

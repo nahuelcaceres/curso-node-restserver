@@ -9,8 +9,11 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
 
+        this.authRoute = '/api/auth';
+        this.categoriesRoute = '/api/categories';
+        this.searchesRoute = '/api/searches';
+        this.productsRoute = '/api/products';
         this.usersRoute = '/api/users';
-        this.authRoute = '/api/auth'
 
         // Connect to database
         this.connectDatabase();
@@ -41,6 +44,9 @@ class Server {
     routes() {
 
         this.app.use( this.authRoute , require('../routes/auth.route'));    
+        this.app.use( this.categoriesRoute , require('../routes/category.route'));    
+        this.app.use( this.searchesRoute , require('../routes/search.route'));    
+        this.app.use( this.productsRoute , require('../routes/product.route'));    
         this.app.use( this.usersRoute , require('../routes/user.route')); 
 
     };
