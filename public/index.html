@@ -9,7 +9,7 @@
     <meta name="google-signin-client_id" content="413577005930-7kh44ej0t32egclel2laqg8ba2q7tlhg.apps.googleusercontent.com">
 </head>
 <body>
-   <h1>Acceso Denegado</h1> 
+   <h1 id="username">Acceso Denegado</h1> 
    <hr>
 
    <div class="g-signin2" data-onsuccess="onSignIn"></div>
@@ -26,10 +26,13 @@
        function onSignIn(googleUser) {
 
             var profile = googleUser.getBasicProfile();
+
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
             console.log('Name: ' + profile.getName());
             console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+            loadInformationFromUser(`Bienid@ ${profile.getName()} (${profile.getEmail()})`);
 
             var id_token = googleUser.getAuthResponse().id_token;
             const data = { id_token };
@@ -46,10 +49,19 @@
 
         function signOut() {
             var auth2 = gapi.auth2.getAuthInstance();
+
             auth2.signOut().then(function () {
-            console.log('User signed out.');
+                console.log('User signed out.');
+                loadInformationFromUser('Acceso denegado')
             });
         }
+
+        function loadInformationFromUser(name = 'Acceso denegado'){
+
+            document.querySelector('#username').innerText = name;
+
+        }
+
    </script>
 </body>
 </html>
