@@ -1,5 +1,5 @@
 const ObjectID = require('mongodb').ObjectID;
-const { Product } = require('../models');
+const Product = require('../models/product');
 
 const getProducts = async(req,res) => {
 
@@ -17,7 +17,7 @@ const getProducts = async(req,res) => {
 
     res.status(200).json({
        entries,
-       categories: products
+       products: products
     })
 
 };

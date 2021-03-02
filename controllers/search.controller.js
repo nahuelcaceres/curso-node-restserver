@@ -1,6 +1,6 @@
 const {ObjectId} = require('mongoose').Types;
-const {User} = require('../models');
-const {Product} = require('../models');
+const User = require('../models/user');
+const Product = require('../models/product');
 
 const allowedCollections = [
     'users',

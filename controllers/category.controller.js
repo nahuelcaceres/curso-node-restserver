@@ -1,5 +1,5 @@
 const ObjectID = require('mongodb').ObjectID;
-const { Category } = require('../models');
+const Category = require('../models/category');
 
 const getCategories = async(req,res) => {
 
