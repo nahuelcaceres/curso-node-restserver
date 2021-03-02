@@ -9,14 +9,19 @@
     <meta name="google-signin-client_id" content="413577005930-7kh44ej0t32egclel2laqg8ba2q7tlhg.apps.googleusercontent.com">
 </head>
 <body>
-   <h1 id="username">Acceso Denegado</h1> 
-   <hr>
+    <div>
+        <h1 id="username">Acceso Denegado</h1> 
+        
+        <hr>
+    </div>
 
    <div class="g-signin2" data-onsuccess="onSignIn"></div>
    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-   <br>
-   <a href="#" onclick="signOut();">Sign out</a>
+   <div>
+       <br>
+       <a href="#" onclick="signOut();">Sign out</a>
+   </div>
 
    <script>
        var url = ( window.location.hostname.includes('localhost'))
