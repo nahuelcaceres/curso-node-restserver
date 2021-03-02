@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { getProducts, getProduct, createProduct, updateProduct, deleteProduct } = require('../controllers/Product.controller');
+const { getProducts, getProduct, createProduct, updateProduct, deleteProduct } = require('../controllers/product.controller');
 const { productExistById, categoryExistById } = require('../helpers/db-validators');
 
 const { fieldValidate } = require('../middlewares/fields-validate');
