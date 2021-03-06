@@ -27,6 +27,7 @@ const SchemaProduct = Schema({
     },
     description: { type: String},
     available: { type: Boolean, default: true},
+    img: { type: String},
 });
 
 // Como hacemos uso del this, no podemos usar una arrow function
