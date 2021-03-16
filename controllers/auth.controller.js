@@ -4,7 +4,6 @@ const { googleVerify } = require('../helpers/google-verify');
 const User = require('../models/user');
 
 const login = async(req, res) => {
-    
     const { email, password } = req.body;
 
     try {
@@ -72,8 +71,8 @@ const googleSignin = async (req, res) => {
         }
         
         if ( !user.status ){
-            // Si bien esta logueado a google y es valid..para mi negocio esta
-            // dado de baja y no puede usar el sistema.
+            // Si bien esta logueado a google y es valido..para mi negocio tiene
+            // estado false y no puede usar el sistema.
             return res.status(401).json({
                 msg: 'Hable con el administrador, usuario bloqueado',
             });
@@ -87,6 +86,8 @@ const googleSignin = async (req, res) => {
         }); 
         
     } catch (error) {
+        console.log('googleSigin -->', error);
+        
         res.status(400).json({
             msg: 'Token de Google no es valido',
             error: error
@@ -94,7 +95,20 @@ const googleSignin = async (req, res) => {
     } 
 };
 
+const renewToken = async (req, res) => {
+    const {authUser} = req;
+     
+    // Genarar el JWT
+    const token = await generateJWT( authUser );
+
+    res.json({
+        authUser,
+        token
+    });
+};
+
 module.exports = {
     login,
-    googleSignin
+    googleSignin,
+    renewToken
 };

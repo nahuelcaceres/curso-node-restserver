@@ -23,20 +23,25 @@ const usersGet = async(req, res) => {
 
 const usersPut = async(req, res) => {
 
-    const { id } = req.params;
-    const { _id, password, google, email, ...rest} = req.body;
-
-    // TODO: validate with db
-    if ( password ){
-        rest.password = encryptPassword( password );
+    try {
+        const { id } = req.params;
+        const { _id, password, google, email, ...rest} = req.body;
+    
+        // TODO: validate with db
+        if ( password ){
+            rest.password = encryptPassword( password );
+        }
+    
+        const user = await User.findByIdAndUpdate( id, rest);
+    
+        res.status(200).json({
+            message: 'put API - controller',
+            user
+        })
+        
+    } catch (err) {
+        console.log('Update:', err);  
     }
-
-    const user = await User.findByIdAndUpdate( id, rest);
-
-    res.status(200).json({
-        message: 'put API - controller',
-        user
-    })
 
 }
 

@@ -35,12 +35,27 @@ const SchemaUser = Schema({
 });
 
 // Como hacemos uso del this, no podemos usar una arrow function
-SchemaUser.methods.toJSON = function() {
-    const {__v, password, _id, ...user} = this.toObject();
+SchemaUser.methods.toJSON = function () {
+    try {
+        const { __v, password, _id, ...user } = this.toObject();
+    
+        user.uid = _id;
+    
+        return user;
+        
+    } catch (error) {
+        console.log('user.toJSON -->', error);
+    }
+}
 
-    user.uid = _id;
+// SchemaUser.pre('find', function (next) {
+//     console.log("Pre Find", this._id);
+//     next();
+// });
 
-    return user;
-} 
+// SchemaUser.pre('findOne', function (next) {
+//     console.log("Pre Find One");
+//     next();
+// });
 
 module.exports = model('User', SchemaUser);
