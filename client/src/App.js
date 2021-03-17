@@ -18,7 +18,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         
         <p>
-           { !data ? "Loading..." : JSON.stringify(data) }
+           { !data ? "Loading....." : JSON.stringify(data) }
         </p>
         
       </header>
