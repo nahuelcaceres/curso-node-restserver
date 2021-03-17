@@ -50,7 +50,7 @@ class Server {
         //Public directory
         // this.app.use( express.static('public')); //Cambio para probar React
         this.app.use( express.static( path.resolve(__dirname, '../client/build')))
-
+        
         // Fileupload - Load file
         this.app.use( fileUpload({
             useTempFiles: true,
