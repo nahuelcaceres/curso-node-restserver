@@ -4,8 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node server/app.js",
-    "build": "cd ../client && npm install && npm run build"
+    "start": "node server/app.js"
   },
   "engine": {
     "node": "12.16.1"
