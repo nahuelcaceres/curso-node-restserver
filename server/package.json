@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node server/app.js"
+    "start": "node app.js"
   },
   "engine": {
     "node": "12.16.1"
@@ -25,5 +25,11 @@
     "mongoose": "^5.11.17",
     "socket.io": "^3.1.2",
     "uuid": "^8.3.2"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  },
+  "devDependencies": {
+    "standard": "^16.0.3"
   }
 }
