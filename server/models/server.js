@@ -48,9 +48,8 @@ class Server {
         this.app.use( express.json() ); 
 
         //Public directory
-        // this.app.use( express.static('public')); //Cambio para probar React
-        this.app.use( express.static( path.resolve(__dirname, '../../client/build')))
-        console.log(path.resolve(__dirname, '../../client/build'));
+        this.app.use( express.static('public') ); //Cambio para probar React
+        //this.app.use( express.static( path.resolve(__dirname, '../../client/build')))
         
         // Fileupload - Load file
         this.app.use( fileUpload({
@@ -71,7 +70,7 @@ class Server {
         this.app.use( this.usersRoute , require('../routes/user.route')); 
 
         this.app.get('*', (req, res) => {
-            res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+            res.sendFile(path.resolve(__dirname, './client', 'index.html'));
         })
     };
 
