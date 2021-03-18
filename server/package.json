@@ -7,9 +7,6 @@
     "start": "node server/app.js",
     "build": "cd ../client && npm install && npm run build"
   },
-  "engines" : {
-    "node": "12.16.1"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
