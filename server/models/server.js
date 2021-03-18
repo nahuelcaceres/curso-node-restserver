@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
@@ -5,6 +6,7 @@ const { createServer } = require('http');
 
 const { dbConnection } = require('../database/config.db');
 const { socketController } = require('../sockets/socket.controller');
+const { response } = require('express');
 
 class Server {
 
@@ -46,8 +48,9 @@ class Server {
         this.app.use( express.json() ); 
 
         //Public directory
-        this.app.use( express.static('public'));
-
+        this.app.use( express.static('public') ); //Cambio para probar React
+        //this.app.use( express.static( path.resolve(__dirname, '../../client/build')))
+        
         // Fileupload - Load file
         this.app.use( fileUpload({
             useTempFiles: true,
@@ -66,6 +69,9 @@ class Server {
         this.app.use( this.uploadsRoute , require('../routes/upload.route'));    
         this.app.use( this.usersRoute , require('../routes/user.route')); 
 
+        this.app.get('*', (req, res) => {
+            res.sendFile(path.resolve(__dirname, './client', 'index.html'));
+        })
     };
 
     sockets() {
