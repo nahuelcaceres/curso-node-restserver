@@ -14,7 +14,7 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
         this.server= createServer( this.app );
-        this.io = require('socket.io')(this.server);
+        // this.io = require('socket.io')(this.server);
 
         this.authRoute = '/api/auth';
         this.categoriesRoute = '/api/categories';
@@ -32,6 +32,13 @@ class Server {
         // Routes
         this.routes()
 
+        this.io = require('socket.io')(this.server, {
+            cors: {
+                origin: "localhost:3000", //your website origin
+                methods: ["GET", "POST", "PUT", "DELETE"],
+                credentials: true
+            }
+        });
         // Sockets
         this.sockets();
     }
@@ -42,7 +49,22 @@ class Server {
 
     middlewares(){
         // CORS
-        this.app.use( cors() );
+        const allowedDomains = ['https://chat-nmc.herokuapp.com/', 'http://localhost:8080/'];
+        this.app.use( cors({
+            origin: function(origin, callback){
+                //bypass the requests with no origin (like, curl requests, mobile app, etc)
+                // console.log('estoy validadndo el origen', origin);
+                //if(!origin) return callback(null, true);
+                
+                if (allowedDomains.indexOf(origin)=== -1) {
+                    const msg = `This site ${origin} does not have an access. Only specifiy domains are allowed to access it.`;
+                    return callback(msg, false);
+                }
+
+                return callback(null, true);
+            }
+        }) );
+        // this.app.options( '*', cors());
 
         // Body Parser
         this.app.use( express.json() ); 
@@ -61,6 +83,13 @@ class Server {
     }
 
     routes() {
+        //Puedo interceptar todo en el momento de responder y hacer algo.
+        // this.app.use(async (req, res, next) => {
+            // res.send = function(data){
+                // console.log(res);
+            // }
+            // next();
+        // } )
 
         this.app.use( this.authRoute , require('../routes/auth.route'));    
         this.app.use( this.categoriesRoute , require('../routes/category.route'));    
@@ -68,7 +97,7 @@ class Server {
         this.app.use( this.productsRoute , require('../routes/product.route'));    
         this.app.use( this.uploadsRoute , require('../routes/upload.route'));    
         this.app.use( this.usersRoute , require('../routes/user.route')); 
-
+        
         this.app.get('*', (req, res) => {
             res.sendFile(path.resolve(__dirname, './client', 'index.html'));
         })
@@ -77,6 +106,13 @@ class Server {
     sockets() {
         //this.io.on('connection', socketController);
         this.io.on('connection', ( socket ) => socketController(socket, this.io ) )
+
+        /* this.io.cors = {
+            origin: '*',
+            methods: ["GET", "PUT", "POST", "DELETE"],
+            allowedHeaders: ['x-token'] ,
+            credentials: true
+        } */
     };
 
     listen() {

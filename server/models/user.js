@@ -48,6 +48,17 @@ SchemaUser.methods.toJSON = function () {
     }
 }
 
+SchemaUser.methods.wrapper = function() {
+    try {
+         const {_id, password, ...user} = this.toObject();
+
+         return user;
+
+    } catch (error) {
+        console.log('user.wrapper -->', error);
+    }
+}
+
 // SchemaUser.pre('find', function (next) {
 //     console.log("Pre Find", this._id);
 //     next();

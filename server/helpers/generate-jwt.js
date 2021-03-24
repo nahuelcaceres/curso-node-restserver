@@ -36,8 +36,9 @@ const checkJWT = async ( token = '' ) => {
        if ( token.length < 10) {
            return null;
        } 
-       const { uid } = jwt.verify( token, process.env.JWT_SECRET_OR_PRIVATE_KEY);
-
+       const uid = jwt.verify( token, process.env.JWT_SECRET_OR_PRIVATE_KEY);
+       // le quite el desctructiring a const {uid} y ahora funciona
+       
        const user = await User.findById( {'_id': ObjectID(uid.uid)} );
 
        if ( user ) {
