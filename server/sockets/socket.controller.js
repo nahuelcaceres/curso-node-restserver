@@ -12,12 +12,9 @@ const socketController = async (socket, io) => {
     if (!user) {
         return socket.disconnect();
     }
-    console.log('We have a new connection!!!');
 
-    console.log(socket.handshake.auth['data'].uid);
     // Funcionalidad para react. 
     socket.on('join', ({uid, room}, callback) => {
-        console.log('uid y room' , uid, room);
 
         const {error, user: userChat} = addUser({id: uid, name: user.name, room});
         if (error) return callback(error);
@@ -25,7 +22,6 @@ const socketController = async (socket, io) => {
         socket.emit('message', {user: 'admin', text: `${userChat.name}, welcome to the room ${userChat.room}`})
         socket.broadcast.to(userChat.room).emit('message', {user: 'admin', text: `${userChat.name}, has joined!`})
 
-        console.log('on join:', 'se agrega el usuario ', user.name, 'en la room:',room);
         socket.join(userChat.room);
 
         io.to(userChat.room).emit('roomData', {room: userChat.room, users: getUsersInRoom(userChat.room)})
@@ -35,7 +31,6 @@ const socketController = async (socket, io) => {
 
     socket.on('sendMessage', (message, callback) => {
 
-        console.log('on sendMessage', message);
         const user = getUser(socket.handshake.auth['data'].uid);
 
         io.to(user.room).emit('message', {user: user.name, text: message});

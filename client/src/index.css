@@ -45,3 +45,7 @@ code {
   color: red;
   margin-bottom: 10px;
 }
+
+.registerButton {
+  margin-left: 10px;
+}

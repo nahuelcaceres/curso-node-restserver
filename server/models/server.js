@@ -49,21 +49,22 @@ class Server {
 
     middlewares(){
         // CORS
-        const allowedDomains = ['https://chat-nmc.herokuapp.com/', 'http://localhost:8080/'];
-        this.app.use( cors({
-            origin: function(origin, callback){
-                //bypass the requests with no origin (like, curl requests, mobile app, etc)
-                // console.log('estoy validadndo el origen', origin);
-                //if(!origin) return callback(null, true);
+        this.app.use(cors());
+        // const allowedDomains = ['https://chat-nmc.herokuapp.com/', 'http://localhost:8080/'];
+        // this.app.use( cors({
+        //     origin: function(origin, callback){
+        //         //bypass the requests with no origin (like, curl requests, mobile app, etc)
+        //         // console.log('estoy validadndo el origen', origin);
+        //         //if(!origin) return callback(null, true);
                 
-                if (allowedDomains.indexOf(origin)=== -1) {
-                    const msg = `This site ${origin} does not have an access. Only specifiy domains are allowed to access it.`;
-                    return callback(msg, false);
-                }
+        //         if (allowedDomains.indexOf(origin)=== -1) {
+        //             const msg = `This site ${origin} does not have an access. Only specifiy domains are allowed to access it.`;
+        //             return callback(msg, false);
+        //         }
 
-                return callback(null, true);
-            }
-        }) );
+        //         return callback(null, true);
+        //     }
+        // }) );
         // this.app.options( '*', cors());
 
         // Body Parser

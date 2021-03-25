@@ -12,7 +12,7 @@ const Join = () => {
                 <h1 className="heading">Join</h1>
                 <div><input placeholder="Room" onChange={(event) => setRoom(event.target.value)} className="joinInput mt-20" type="text" /></div>
                 <Link onClick={(ev) => (!room) ? ev.preventDefault() : null} to={`/chat?room=${room}`}>
-                    <button className="button mt-20" type="submit">Unirse</button>
+                    <button className="button mt-20" type="submit">Go</button>
                 </Link>
             </div>
         </div>

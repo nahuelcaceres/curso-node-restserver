@@ -6,7 +6,7 @@ import InfoBar from "../../components/InfoBar/InfoBar";
 import Input from "../../components/Input/Input";
 import Messages from "../../components/Messages/Messages";
 
-import { getToken, getUser } from '../../utils/Common';
+import { getToken, getUser, removeUserSession } from '../../utils/Common';
 
 import './Chat.css';
 
@@ -29,6 +29,7 @@ const Chat = ({ location }) => {
 
         //---- CLEAN UP THE EFFECT
         return (() => {
+            removeUserSession();
             socket.emit('disconnect_');
 
             socket.off();

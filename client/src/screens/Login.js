@@ -8,9 +8,19 @@ const Login = (props) => {
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
 
+    const handleRegister = () => {
+
+    }
+
     const handleLogin = () => {
         if (email === '' || password === '') {
             setError('Completar campos')
+            return
+        }
+
+        let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!regEmail.test(email)) {
+            setError('Invalid Email Address')
             return
         }
 
@@ -47,7 +57,6 @@ const Login = (props) => {
             })
             .catch((error) => {
                 setLoading(false)
-                console.log(error);
                 setError('Something went wrong. Please try again later.')
             });
     }
@@ -56,12 +65,16 @@ const Login = (props) => {
         <div>
             <h2>Login</h2>
             <div>
-                <input value={email} onChange={e => setEmail(e.target.value)} type="text" placeholder="username" />
+                <input value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder="email" />
             </div>
 
             <br />
             <div>
-                <input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="password" />
+                <input value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    onKeyPress={event => event.key === 'Enter' ? handleLogin() : null}
+                    type="password"
+                    placeholder="password" />
             </div>
             <br />
 
@@ -74,6 +87,13 @@ const Login = (props) => {
                 onClick={handleLogin}
             />
 
+            <input
+                className='registerButton'
+                type="button"
+                value={loading ? "Loading..." : "Register"}
+                disabled={loading}
+                onClick={handleRegister}
+            />
         </div>
     );
 }

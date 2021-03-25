@@ -19,7 +19,6 @@ function App() {
       return;
     }
 
-    console.log('Estoy por hacer el verifyToken contra la api');
     fetch(`/api/auth/verifyToken?token=${token}`)
       .then((res) => (res.json()))
       .then((data) => {
@@ -30,7 +29,6 @@ function App() {
       .catch((error) => {
         removeUserSession()
         setAuthLoading(false)
-        console.log(error);
       });
 
   }, [])
