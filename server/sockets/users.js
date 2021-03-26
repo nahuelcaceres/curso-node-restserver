@@ -48,6 +48,15 @@ const getRooms = () => {
     return rooms;
 }
 
+const getUsers = () => {
+    return users;
+};
+
 module.exports = {
-    addUser, removeUser, getUsersInRoom, getUser, getRooms
+    addUser,
+    removeUser, 
+    getUsersInRoom, 
+    getUser, 
+    getRooms,
+    getUsers
 };
