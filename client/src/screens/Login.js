@@ -62,38 +62,44 @@ const Login = (props) => {
     }
 
     return (
-        <div>
-            <h2>Login</h2>
-            <div>
-                <input value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder="email" />
-            </div>
+        <div className="container">
+            <h2 className='text-center'>Login</h2>
+            <form>
+                <div className="mb-3">
 
-            <br />
-            <div>
-                <input value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    onKeyPress={event => event.key === 'Enter' ? handleLogin() : null}
-                    type="password"
-                    placeholder="password" />
-            </div>
-            <br />
+                    <input value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder="email" className='form-control' />
 
-            {error && <div className='error'>{error}</div>}
+                </div>
 
-            <input
-                type="button"
-                value={loading ? "Loading..." : "Login"}
-                disabled={loading}
-                onClick={handleLogin}
-            />
+                <div className="mb-3">
+                    <input value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        onKeyPress={event => event.key === 'Enter' ? handleLogin() : null}
+                        type="password"
+                        placeholder="password"
+                        className='form-control' />
+                </div>
 
-            <input
-                className='registerButton'
-                type="button"
-                value={loading ? "Loading..." : "Register"}
-                disabled={loading}
-                onClick={handleRegister}
-            />
+                {error && <div className='error'>{error}</div>}
+
+                <input
+                    className="btn btn-primary"
+                    type="button"
+                    value={loading ? "Loading..." : "Login"}
+                    disabled={loading}
+                    onClick={handleLogin}
+                />
+
+                <input
+                    className='btn btn-secondary registerButton'
+                    type="button"
+                    value={loading ? "Loading..." : "Register"}
+                    disabled={loading}
+                    onClick={handleRegister}
+                />
+
+            </form>
+
         </div>
     );
 }

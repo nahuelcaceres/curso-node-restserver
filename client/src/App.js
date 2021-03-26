@@ -44,8 +44,8 @@ function App() {
         <div className="header">
           <NavLink exact activeClassName="active" to="/">Home</NavLink>
           <NavLink activeClassName="active" to="/login">Login</NavLink>
-          <NavLink activeClassName="active" to="/join">Join <small>Access with token</small></NavLink>
-          <NavLink activeClassName="active" to="/dashboard">Dashboard <small>Access with token</small></NavLink>
+          {/* <NavLink activeClassName="active" to="/join">Join <small>Access with token</small></NavLink> */}
+          {/* <NavLink activeClassName="active" to="/dashboard">Dashboard <small>Access with token</small></NavLink> */}
         </div>
 
         <div className="content">

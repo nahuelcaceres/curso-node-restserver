@@ -5,6 +5,7 @@ import queryString from 'query-string';
 import InfoBar from "../../components/InfoBar/InfoBar";
 import Input from "../../components/Input/Input";
 import Messages from "../../components/Messages/Messages";
+import TextContainer from "../../components/TextContainer/TextContainer"
 
 import { getToken, getUser, removeUserSession } from '../../utils/Common';
 
@@ -18,10 +19,9 @@ const Chat = ({ location }) => {
     const [messages, setMessages] = useState([]);
     const user = getUser();
     const { room } = queryString.parse(location.search);
-    const ENDPOINT = 'https://chat-nmc.herokuapp.com/';
+    const ENDPOINT = 'https://chat-nmc.herokuapp.com/'; //'http://localhost:8080/' 
 
     useEffect(() => {
-        console.log(ENDPOINT);
         socket = io(ENDPOINT, {
             transports: ['websocket', 'hola viejo'],
             auth: { "x-token": getToken(), data: { uid: user.uid, room: room } },
@@ -54,7 +54,9 @@ const Chat = ({ location }) => {
             setMessages([...messages, message]);
         })
 
-        socket.on("roomData", ({ users }) => {
+        socket.on('roomData', ({ users }) => {
+            console.log('on roomData');
+            console.log({users});
             setUsers(users);
         });
 
@@ -76,6 +78,7 @@ const Chat = ({ location }) => {
                 <Messages messages={messages} name={user.name} />
                 <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
             </div>
+            <TextContainer users={users} />
         </div>
     );
 }

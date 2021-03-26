@@ -63,7 +63,6 @@ const socketController = async (socket, io) => {
     })
 
     socket.on('disconnect_', () => {
-        console.log('se desconecto en react');
         chat.desconectarUsuario(user.id);
         io.emit('usuarios-activos', chat.usuariosArray);
     })

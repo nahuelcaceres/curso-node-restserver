@@ -13,7 +13,13 @@ const { fieldValidate } = require('../middlewares/fields-validate');
 const { validRole, emailAlreadyExist, userExistById} = require('../helpers/db-validators');
 const { jwtValidate } = require('../middlewares/jwt-validate');
 const { isRoleAdmin, hasRole } = require('../middlewares/roles-validate');
+const { getRooms } = require('../sockets/users');
 
+router.get('/rooms', async(req, res) => {
+    res.status(200).json({
+        rooms: getRooms()
+     })
+});
 
 router.get('/', usersGet );
 

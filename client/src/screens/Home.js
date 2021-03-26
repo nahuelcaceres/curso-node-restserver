@@ -2,11 +2,9 @@ import React from 'react';
 
 const Home = () => {
     return (
-        <div>
-            <h2>Welcome to the web chat application</h2>
-            <h4>Nahuel Caceres</h4>
-
-
+        <div className='container'>
+            <h2 className='text-center'>Web chat application</h2>
+            <a className='text-center' href="https://www.linkedin.com/in/nahuel-caceres/">by Nahuel Caceres</a>
         </div>
     );
 }

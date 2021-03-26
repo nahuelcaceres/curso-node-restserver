@@ -23,17 +23,20 @@ html, body {
   
   .joinInnerContainer {
     width: 20%;
+    height: 90%;
   }
   
   .joinInput {
-    border-radius: 0;
-    padding: 15px 20px;
+    border-radius: 6%;
+    padding: 10px 20px;
+    margin-bottom: 30px;
     width: 100%;
   }
   
   .heading {
     color: white;
     font-size: 2.5em;
+    margin-top: 10px;
     padding-bottom: 10px;
     border-bottom: 2px solid white;
   }
@@ -61,6 +64,7 @@ html, body {
   
     .joinInnerContainer {
       width: 90%;
+      height: 90%;
     }
   
   
