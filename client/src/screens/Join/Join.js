@@ -25,10 +25,10 @@ const Join = (props) => {
                 {
                     rooms.length > 0 &&
                     <div className='roomSelect' >
-                        <select className="form-select" aria-label="Default select example">
+                        <select className="form-select"  onChange={(event) => setRoom(event.target.value)} aria-label="Default select example">
                             {rooms.map((room) => <option value={room} key={room}>{room}</option>)}
                         </select>
-                        <button className='btn btn-secondary'>Go</button>
+                        <button className='btn btn-secondary' onClick={handleJoin()}>Go</button>
                     </div>
                 }
 
