@@ -25,7 +25,15 @@ html, body {
     width: 20%;
     height: 90%;
   }
-  
+
+  .roomSelect {
+    display: flex;
+
+  }
+
+  .roomSelect button {
+    margin-left: 5px;
+  }
   .joinInput {
     border-radius: 6%;
     padding: 10px 20px;

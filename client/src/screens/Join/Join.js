@@ -23,12 +23,13 @@ const Join = (props) => {
                 <h1 className="heading">Choose a room</h1>
 
                 {
-                    rooms.length > 0 && 
-                        <div >
-                            <select className="form-select" aria-label="Default select example">
-                                {rooms.map(( room ) => <option value={room} key={room}>{room}</option>)}
-                            </select>
-                        </div>
+                    rooms.length > 0 &&
+                    <div className='roomSelect' >
+                        <select className="form-select" aria-label="Default select example">
+                            {rooms.map((room) => <option value={room} key={room}>{room}</option>)}
+                        </select>
+                        <button className='btn btn-secondary'>Go</button>
+                    </div>
                 }
 
                 <div>

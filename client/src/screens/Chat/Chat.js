@@ -19,7 +19,7 @@ const Chat = ({ location }) => {
     const [messages, setMessages] = useState([]);
     const user = getUser();
     const { room } = queryString.parse(location.search);
-    const ENDPOINT = 'https://chat-nmc.herokuapp.com/'; //'http://localhost:8080/' 
+    const ENDPOINT = 'https://chat-nmc.herokuapp.com/'; //'https://chat-nmc.herokuapp.com/'; //'http://localhost:8080/' 
 
     useEffect(() => {
         socket = io(ENDPOINT, {
